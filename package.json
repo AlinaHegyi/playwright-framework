@@ -4,6 +4,7 @@
   "main": "index.js",
   "scripts": {
     "test": "npx playwright test"
+   
   },
   "keywords": [],
   "author": "",
@@ -11,6 +12,8 @@
   "description": "",
   "devDependencies": {
     "@playwright/test": "^1.49.0",
-    "@types/node": "^22.9.1"
+    "@types/node": "^22.9.1",
+    "globals": "^15.12.0"
+    
   }
 }

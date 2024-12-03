@@ -91,7 +91,7 @@ test.describe("random test", () => {
     // //   const removeCompletedTaskButton = page.locator(
     // //     removeCompletedTaskButtonSelector
     // //   );
-    //   
+    //
     // });
 
     await test.step("9.Validate that the task list is empty, displaying the message “No tasks found!”.", async () => {
@@ -195,7 +195,7 @@ test.describe("random test", () => {
 
     await test.step('5. Validate error message appears and says "Error: Todo cannot be more than 30 characters!"', async () => {
       expect(errorMessage).toHaveText(
-        "Error: Todo cannot be more than 30 characters!"
+        "Error: Todo cannot be more than 30 characters!",
       );
     });
 
@@ -215,7 +215,7 @@ test.describe("random test", () => {
 
     await test.step('9. Validate that an error message is displayed, indicating "Error: You already have {ITEM} in your todo list."', async () => {
       expect(errorMessage).toHaveText(
-        `Error: You already have ${validTask} in your todo list.`
+        `Error: You already have ${validTask} in your todo list.`,
       );
     });
   });

@@ -102,7 +102,6 @@ test.describe("random test", () => {
   });
 
   test(" Case 03 - Multiple Task Operations", async ({ page }) => {
-
     const tasks = page.locator("#panel .panel-block div");
     const myTasks = ["task1", "task2", "task3", "task4", "task5"];
     const addButton = page.locator(addButtonSelector);
@@ -111,7 +110,7 @@ test.describe("random test", () => {
     await test.step("2.Enter and add 5 to-do items individually", async () => {
       for (const task of myTasks) {
         await typeText(page, "New todo", task);
-        await clickButton(page, 'ADD');
+        await clickButton(page, "ADD");
       }
     });
 
@@ -139,15 +138,16 @@ test.describe("random test", () => {
     });
   });
 
-  test(" Case 04 - Search and Filter Functionality in Todo App", async ({  page }) => {
-
+  test(" Case 04 - Search and Filter Functionality in Todo App", async ({
+    page,
+  }) => {
     const myTasks = ["task1", "task2", "task3", "task4", "task5"];
-    const tasks = page.locator('#panel .panel-block div');
+    const tasks = page.locator("#panel .panel-block div");
 
     await test.step("2.Enter and add 5 to-do items individually.", async () => {
       for (const task of myTasks) {
-        await typeText(page, 'New todo', task);
-        await clickButton(page, 'ADD');
+        await typeText(page, "New todo", task);
+        await clickButton(page, "ADD");
       }
     });
 
@@ -158,63 +158,66 @@ test.describe("random test", () => {
       }
     });
 
-    await test.step('4. Enter the complete name of the previously added to-do item into the search bar', async() => {
-        await typeText(page, 'Type to search', myTasks[0]);
+    await test.step("4. Enter the complete name of the previously added to-do item into the search bar", async () => {
+      await typeText(page, "Type to search", myTasks[0]);
     });
 
-    await test.step('5. Validate that the list is now filtered to show only the item you searched for', async() => {
-        await expect(tasks).toHaveText(myTasks[0]);
+    await test.step("5. Validate that the list is now filtered to show only the item you searched for", async () => {
+      await expect(tasks).toHaveText(myTasks[0]);
     });
 
-    await test.step('6. Validate that the number of tasks visible in the list is exactly one', async() => {
-        await expect(tasks).toHaveCount(1);
+    await test.step("6. Validate that the number of tasks visible in the list is exactly one", async () => {
+      await expect(tasks).toHaveCount(1);
     });
-});
-
-
-test('Test Case 05 - Task Validation and Error Handling', async({ page }) => {
- const invalidTask = 'This task is to long to be completed';
-    const validTask = 'Study';
-    const taskListMessage = page.locator(taskListMessageSelector);
-     const tasks = page.locator('#panel .panel-block div');
-     const errorMessage = page.locator('.is-danger');
-    const addButton = page.locator(addButtonSelector);
-    await test.step('2. Attempt to add an empty task to the to-do list', async() => {
-        await addButton.click();
-    });
-
-    await test.step('3. Validate that the task list is empty, displaying the message "No task found!"', async() => {
-        await expect(tasks).toHaveCount(0);
-        await expect(taskListMessage).toHaveText('No tasks found!');
-    });
-
-    await test.step('4. Enter an item name exceeding 30 characters into the list', async() => {
-        await typeText(page, 'New todo', invalidTask);
-        await addButton.click();
-    });
-
-    await test.step('5. Validate error message appears and says "Error: Todo cannot be more than 30 characters!"', async() => {
-        expect(errorMessage).toHaveText('Error: Todo cannot be more than 30 characters!');
-    });
-
-    await test.step('6. Add a valid item name to the list', async() => {
-        await typeText(page, 'New todo', validTask);
-        clickButton(page, 'ADD');
-    });
-
-    await test.step('7. Validate that the active task count is exactly one', async() => {
-        await expect(tasks).toHaveCount(1);
-    });
-
-    await test.step('8. Try to enter an item with the same name already present on the list', async() => {
-        await typeText(page, 'New todo', validTask);
-        await addButton.click();
-    });
-
-    await test.step('9. Validate that an error message is displayed, indicating "Error: You already have {ITEM} in your todo list."', async() => {
-        expect(errorMessage).toHaveText(`Error: You already have ${validTask} in your todo list.`);
-    });
-});
-
   });
 
+  test("Test Case 05 - Task Validation and Error Handling", async ({
+    page,
+  }) => {
+    const invalidTask = "This task is to long to be completed";
+    const validTask = "Study";
+    const taskListMessage = page.locator(taskListMessageSelector);
+    const tasks = page.locator("#panel .panel-block div");
+    const errorMessage = page.locator(".is-danger");
+    const addButton = page.locator(addButtonSelector);
+    await test.step("2. Attempt to add an empty task to the to-do list", async () => {
+      await addButton.click();
+    });
+
+    await test.step('3. Validate that the task list is empty, displaying the message "No task found!"', async () => {
+      await expect(tasks).toHaveCount(0);
+      await expect(taskListMessage).toHaveText("No tasks found!");
+    });
+
+    await test.step("4. Enter an item name exceeding 30 characters into the list", async () => {
+      await typeText(page, "New todo", invalidTask);
+      await addButton.click();
+    });
+
+    await test.step('5. Validate error message appears and says "Error: Todo cannot be more than 30 characters!"', async () => {
+      expect(errorMessage).toHaveText(
+        "Error: Todo cannot be more than 30 characters!"
+      );
+    });
+
+    await test.step("6. Add a valid item name to the list", async () => {
+      await typeText(page, "New todo", validTask);
+      clickButton(page, "ADD");
+    });
+
+    await test.step("7. Validate that the active task count is exactly one", async () => {
+      await expect(tasks).toHaveCount(1);
+    });
+
+    await test.step("8. Try to enter an item with the same name already present on the list", async () => {
+      await typeText(page, "New todo", validTask);
+      await addButton.click();
+    });
+
+    await test.step('9. Validate that an error message is displayed, indicating "Error: You already have {ITEM} in your todo list."', async () => {
+      expect(errorMessage).toHaveText(
+        `Error: You already have ${validTask} in your todo list.`
+      );
+    });
+  });
+});
