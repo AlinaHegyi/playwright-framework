@@ -111,13 +111,7 @@ test('Test Case 3 - Add a Course to the Cart and Validate', async ({ shoppingCar
              });
 
 
-
     await test.step('4. Validate that the course price is added to the total price excluding the discount amount', async () => {
-//
-//
-//
-//
-
     });
 
     await test.step('5.Click on the “Place Order” button', async () => {
@@ -164,7 +158,7 @@ test('Test Case 4 - Add 2 courses to the cart and validate', async({ shoppingCar
     });
 });
 
-test.only('Test Case 5 - Add All Three Courses to the Cart and Validate', async({ shoppingCart }) => {
+test('Test Case 5 - Add All Three Courses to the Cart and Validate', async({ shoppingCart }) => {
     await test.step('2. Click on the “Add to Cart” button for all three courses', async () => {
         const numberOfCourses = await shoppingCart.addToCartButtons.count();
   for (let i = 0; i < numberOfCourses; i++) {
@@ -190,7 +184,7 @@ test.only('Test Case 5 - Add All Three Courses to the Cart and Validate', async(
         }
       
      });
-
+// both these steps are failing, step 3 and step 4.  I will watch the recordings for solutions
      await test.step(`4. Validate that the course prices are added to the total price excluding the discount amounts`, async () => {
         const itemsCount = await shoppingCart.itemsInCart.count();
         let expectedTotalPrice = 0;
